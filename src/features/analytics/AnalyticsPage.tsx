@@ -62,10 +62,10 @@ export function AnalyticsPage() {
   )
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-xl font-semibold text-gray-900">Analytics</h2>
+    <div className="space-y-6 sm:space-y-8">
+      <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">Analytics</h2>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
           <h3 className="text-sm font-medium text-gray-500">Projects completed</h3>
           <p className="mt-1 text-2xl font-bold text-gray-900">{completedCount}</p>

@@ -31,13 +31,13 @@ export function ProjectModal({ title, children, onClose }: ProjectModalProps) {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative w-full max-w-lg rounded-xl bg-white shadow-xl">
-        <div className="border-b border-gray-200 px-6 py-4">
+      <div className="relative w-full max-w-lg rounded-xl bg-white shadow-xl max-h-[90dvh] flex flex-col">
+        <div className="shrink-0 border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4">
           <h2 id="modal-title" className="text-lg font-semibold text-gray-900">
             {title}
           </h2>
         </div>
-        <div className="max-h-[calc(100vh-12rem)] overflow-y-auto px-6 py-4">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-6">
           {children}
         </div>
       </div>

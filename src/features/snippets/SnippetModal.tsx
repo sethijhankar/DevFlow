@@ -31,13 +31,13 @@ export function SnippetModal({ title, children, onClose }: SnippetModalProps) {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-xl bg-white shadow-xl">
-        <div className="border-b border-gray-200 px-6 py-4">
+      <div className="relative flex max-h-[90dvh] w-full max-w-2xl flex-col overflow-hidden rounded-xl bg-white shadow-xl">
+        <div className="shrink-0 border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4">
           <h2 id="snippet-modal-title" className="text-lg font-semibold text-gray-900">
             {title}
           </h2>
         </div>
-        <div className="max-h-[calc(90vh-5rem)] overflow-y-auto px-6 py-4">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-6">
           {children}
         </div>
       </div>

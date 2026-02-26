@@ -27,8 +27,8 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+    <div className="flex min-h-screen min-h-[100dvh] items-center justify-center bg-gray-50 px-4 py-6">
+      <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h1 className="text-center text-2xl font-bold text-gray-900">DevFlow</h1>
         <p className="mt-2 text-center text-sm text-gray-600">
           Sign in to continue

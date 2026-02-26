@@ -80,12 +80,12 @@ export function SnippetsPage() {
 
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <h2 className="text-xl font-semibold text-gray-900">Snippets</h2>
         <button
           type="button"
           onClick={() => setModal('create')}
-          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          className="w-full rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-gray-800 active:bg-gray-700 sm:w-auto"
         >
           Add snippet
         </button>
@@ -97,12 +97,12 @@ export function SnippetsPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search..."
-          className="rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="min-h-[2.5rem] flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:min-w-[12rem]"
         />
         <select
           value={tagFilter ?? ''}
           onChange={(e) => setTagFilter(e.target.value || null)}
-          className="rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-600"
+          className="min-h-[2.5rem] rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-600"
         >
           <option value="">All tags</option>
           {allTags.map((tag) => (

@@ -60,12 +60,12 @@ export function NoteEditor({ note, onDelete }: NoteEditorProps) {
             value={tagsStr}
             onChange={(e) => setTagsFromString(e.target.value)}
             placeholder="Tags (comma-separated)"
-            className="rounded border border-gray-200 px-2 py-1 text-sm text-gray-600 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="min-h-[2.25rem] rounded-lg border border-gray-200 px-2 py-1.5 text-sm text-gray-600 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
           <select
             value={projectId ?? ''}
             onChange={(e) => setProjectId(e.target.value || null)}
-            className="rounded border border-gray-200 px-2 py-1 text-sm text-gray-600 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="min-h-[2.25rem] rounded-lg border border-gray-200 px-2 py-1.5 text-sm text-gray-600 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           >
             <option value="">No project</option>
             {projects.map((p) => (
@@ -120,7 +120,7 @@ export function NoteEditor({ note, onDelete }: NoteEditorProps) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write your note in Markdown..."
-            className="min-h-[400px] w-full resize-none border-0 bg-transparent p-4 text-sm text-gray-700 placeholder:text-gray-400 focus:ring-0"
+            className="min-h-[280px] w-full resize-none border-0 bg-transparent p-4 text-sm text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:min-h-[400px]"
             spellCheck={false}
           />
         ) : (

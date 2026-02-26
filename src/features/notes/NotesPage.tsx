@@ -123,16 +123,24 @@ export function NotesPage() {
     )
   }
 
+  const showListOnMobile = !selectedNote
+  const showEditorOnMobile = !!selectedNote
+
   return (
-    <div className="flex h-[calc(100vh-8rem)] gap-4">
-      <aside className="flex w-72 shrink-0 flex-col border-r border-gray-200">
-        <div className="flex items-center justify-between border-b border-gray-200 py-2">
-          <h2 className="text-lg font-semibold text-gray-900">Notes</h2>
+    <div className="flex h-[calc(100vh-7rem)] flex-col gap-4 lg:h-[calc(100vh-8rem)] lg:flex-row lg:gap-4">
+      {/* List: on mobile hidden when a note is selected */}
+      <aside
+        className={`flex min-h-0 w-full flex-col rounded-lg border border-gray-200 bg-white lg:w-72 lg:shrink-0 lg:border-r ${
+          showListOnMobile ? 'flex' : 'hidden lg:flex'
+        }`}
+      >
+        <div className="flex items-center justify-between border-b border-gray-200 px-3 py-2 sm:px-4">
+          <h2 className="text-base font-semibold text-gray-900 sm:text-lg">Notes</h2>
           <button
             type="button"
             onClick={handleNewNote}
             disabled={isCreating || createNote.isPending}
-            className="rounded-lg bg-gray-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50 active:bg-gray-700"
           >
             {createNote.isPending || isCreating ? 'Creating…' : 'New note'}
           </button>
@@ -160,11 +168,11 @@ export function NotesPage() {
           className="mx-2 mt-2 rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
 
-        <div className="mt-2 flex flex-wrap gap-1 px-2">
+        <div className="mt-2 flex flex-wrap gap-2 px-2">
           <select
             value={tagFilter ?? ''}
             onChange={(e) => setTagFilter(e.target.value || null)}
-            className="rounded border border-gray-200 px-2 py-1 text-xs text-gray-600"
+            className="min-h-[2.25rem] rounded-lg border border-gray-200 px-2 py-1.5 text-sm text-gray-600"
           >
             <option value="">All tags</option>
             {allTags.map((tag) => (
@@ -176,7 +184,7 @@ export function NotesPage() {
           <select
             value={projectFilter ?? ''}
             onChange={(e) => setProjectFilter(e.target.value || null)}
-            className="rounded border border-gray-200 px-2 py-1 text-xs text-gray-600"
+            className="min-h-[2.25rem] rounded-lg border border-gray-200 px-2 py-1.5 text-sm text-gray-600"
           >
             <option value="">All projects</option>
             {projects.map((p) => (
@@ -187,7 +195,7 @@ export function NotesPage() {
           </select>
         </div>
 
-        <div className="mt-2 flex-1 overflow-y-auto px-2">
+        <div className="mt-2 min-h-0 flex-1 overflow-y-auto px-2 pb-4">
           {filteredNotes.length === 0 ? (
             <p className="py-4 text-center text-sm text-gray-500">
               {notes.length === 0
@@ -210,22 +218,41 @@ export function NotesPage() {
         </div>
       </aside>
 
-      <section className="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white">
+      {/* Editor: on mobile full width when note selected, with back button */}
+      <section
+        className={`min-h-0 min-w-0 flex-1 rounded-lg border border-gray-200 bg-white ${
+          showEditorOnMobile ? 'flex flex-col' : 'hidden lg:flex'
+        }`}
+      >
         {selectedNote ? (
-          <NoteEditor
-            note={selectedNote}
-            onDelete={handleDelete}
-          />
+          <>
+            <button
+              type="button"
+              onClick={() => setSelectedId(null)}
+              className="flex w-full items-center gap-2 border-b border-gray-200 px-3 py-2.5 text-left text-sm font-medium text-gray-600 hover:bg-gray-50 active:bg-gray-100 lg:hidden"
+            >
+              <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to notes
+            </button>
+            <div className="min-h-0 flex-1 overflow-auto">
+              <NoteEditor
+                note={selectedNote}
+                onDelete={handleDelete}
+              />
+            </div>
+          </>
         ) : (
-          <div className="flex h-full flex-col items-center justify-center text-gray-500">
-            <p className="text-sm">
+          <div className="flex h-full flex-col items-center justify-center p-6 text-gray-500">
+            <p className="text-center text-sm">
               Select a note or create a new one to start writing.
             </p>
             <button
               type="button"
               onClick={handleNewNote}
               disabled={isCreating || createNote.isPending}
-              className="mt-2 text-sm font-medium text-blue-600 hover:underline disabled:opacity-50"
+              className="mt-3 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50 active:bg-gray-700"
             >
               {createNote.isPending || isCreating ? 'Creating…' : 'New note'}
             </button>
