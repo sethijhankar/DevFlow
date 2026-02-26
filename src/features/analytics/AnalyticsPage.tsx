@@ -107,7 +107,7 @@ export function AnalyticsPage() {
                   paddingAngle={2}
                   dataKey="value"
                   nameKey="name"
-                  label={({ name, value }) =>
+                  label={({ name, value }: { name: string; value: number }) =>
                     value > 0 ? `${name}: ${value}` : null
                   }
                 >
@@ -174,7 +174,7 @@ export function AnalyticsPage() {
               <XAxis
                 dataKey="date"
                 tick={{ fontSize: 10 }}
-                tickFormatter={(v) => {
+                tickFormatter={(v: string) => {
                   const d = new Date(v)
                   return `${d.getMonth() + 1}/${d.getDate()}`
                 }}
@@ -182,12 +182,14 @@ export function AnalyticsPage() {
               <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
               <Tooltip
                 labelFormatter={(v) => new Date(v).toLocaleDateString()}
-                formatter={(value: number, name: string) => {
-                  if (name === 'count') return [value, 'Activities']
-                  if (name === 'projects') return [value, 'Projects']
-                  if (name === 'notes') return [value, 'Notes']
-                  if (name === 'snippets') return [value, 'Snippets']
-                  return [value, name]
+                formatter={(value, name) => {
+                  const v = Number(value ?? 0)
+                  const n = String(name ?? '')
+                  if (n === 'count') return [v, 'Activities']
+                  if (n === 'projects') return [v, 'Projects']
+                  if (n === 'notes') return [v, 'Notes']
+                  if (n === 'snippets') return [v, 'Snippets']
+                  return [v, n]
                 }}
               />
               <Area

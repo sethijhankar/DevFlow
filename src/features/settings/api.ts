@@ -9,10 +9,7 @@ function settingsRef(userId: string) {
   return doc(db, 'users', userId, 'settings', SETTINGS_DOC_ID)
 }
 
-function mergeSection<T extends Record<string, unknown>>(
-  data: unknown,
-  defaults: T
-): T {
+function mergeSection<T extends object>(data: unknown, defaults: T): T {
   if (data == null || typeof data !== 'object' || Array.isArray(data))
     return defaults
   return { ...defaults, ...(data as Record<string, unknown>) } as T
@@ -52,7 +49,7 @@ export async function updateSettings(
   const snap = await getDoc(ref)
   const current = toSettings(snap.exists() ? (snap.data() as Record<string, unknown>) : null)
   const next = { ...current, ...patch }
-  await setDoc(ref, {
+  const docData = {
     profile: next.profile,
     appearance: next.appearance,
     notifications: next.notifications,
@@ -60,5 +57,6 @@ export async function updateSettings(
     ai: next.ai,
     preferences: next.preferences,
     updatedAt: serverTimestamp(),
-  })
+  }
+  await setDoc(ref, docData as Record<string, unknown>)
 }

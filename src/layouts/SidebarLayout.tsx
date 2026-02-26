@@ -26,7 +26,7 @@ export function SidebarLayout() {
               key={to}
               to={to}
               end={end}
-              className={({ isActive }) =>
+              className={({ isActive }: { isActive: boolean }) =>
                 `block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                   isActive
                     ? 'bg-gray-100 text-gray-900'
